@@ -54,11 +54,7 @@
             resize: none;
         }
 
-        /*  
-        .light {
-            background-color: white;
-        }
-*/
+
         /*  */
         .dark {
             background: black;
@@ -138,11 +134,22 @@
         홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript
         */
         const $btn2 = document.querySelector('header .center #btn2');
+        const $inner = document.querySelector('section .content .right .inner');
+        // console.log($inner);
 
         $btn2.addEventListener('click', () => {
+            $btn2.classList.toggle('name');
+            if (!$btn2.classList.contains('name')) {
+                $inner.innerHTML = '홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript';
+                $btn2.textContent = '내용 보기';
+            } else {
+                $inner.innerHTML =
+                    '<p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다.또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다. ';
+                $inner.innerHTML += '<a href="http://www.naver.com">네이버로 이동</a>';
 
+                $btn2.textContent = '이름 보기';
+            }
         });
-
 
         /*
         메모장 보기 모드는 textarea를 생성해서 추가.
@@ -152,7 +159,34 @@
         생성하신 요소를 추가해 주시면 되겠습니다.
         */
 
+        const $btn3 = document.querySelector('header .center #btn3');
+        const $left = document.querySelector('.content > .left');
+        const $inner2 = document.querySelector('.content > .left >.inner');
 
+        $btn3.addEventListener('click', () => {
+            $inner2.classList.toggle('memo');
+            if($inner2.classList.contains('memo')) {
+                $btn3.textContent = '사진 모드';
+                $inner2.removeChild($inner2.firstElementChild);
+                
+                const $textarea = document.createElement('input');
+                $textarea.classList.add('memo');
+                $inner2.appendChild($textarea);
+                
+                const $confirm = document.createElement('button');
+                $confirm.textContent = '등록';
+                $inner2.appendChild($confirm);
+            } else {
+                $btn3.textContent = '메모장 모드';
+                $inner2.removeChild($inner2.firstElementChild);
+                $inner2.removeChild($inner2.lastElementChild);
+                
+                const $img = document.createElement('img');
+                $inner2.appendChild($img);
+                $img.setAttribute('src', './img/1.jpg');
+
+            }
+        });
 
     </script>
 
