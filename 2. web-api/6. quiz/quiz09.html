@@ -51,7 +51,7 @@
             width: 100%;
             height: 250px;
             box-sizing: border-box;
-            resize: none;
+            resize: none;   /* 사이즈 조정 막기 */
         }
 
 
@@ -116,12 +116,17 @@
         const $p = document.querySelector('section .content .right .inner p');
         const $a = document.querySelector('section .content .right .inner a');
 
+        // const $tags = document.querySelectorAll('p, a, h2');
+        // [...$tags].forEach($ele => $ele.style.color = 'white');
+
         $btn1.onclick = function () {
             $body.classList.toggle('dark');
-            if ($btn1.classList.contains('dark')) {
-                $btn1.textContent = '어둡게 보기';
-            } else {
+            if ($body.classList.contains('dark')) {
+                //어둡게 보기 모드
                 $btn1.textContent = '밝게 보기';
+            } else {
+                //밝게 보기 모드
+                $btn1.textContent = '어둡게 보기';
             }
         }
 
@@ -137,19 +142,35 @@
         const $inner = document.querySelector('section .content .right .inner');
         // console.log($inner);
 
-        $btn2.addEventListener('click', () => {
-            $btn2.classList.toggle('name');
-            if (!$btn2.classList.contains('name')) {
-                $inner.innerHTML = '홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript';
-                $btn2.textContent = '내용 보기';
-            } else {
-                $inner.innerHTML =
-                    '<p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다.또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다. ';
-                $inner.innerHTML += '<a href="http://www.naver.com">네이버로 이동</a>';
+        // $btn2.addEventListener('click', () => {
+        //     $btn2.classList.toggle('name');
+        //     if (!$btn2.classList.contains('name')) {
+        //         $inner.innerHTML = '<p>홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript</p>';
+        //         $btn2.textContent = '내용 보기';
+        //     } else {
+        //         $inner.innerHTML =
+        //             '<p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다.또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다. ';
+        //         $inner.innerHTML += '<a href="http://www.naver.com">네이버로 이동</a>';
 
+        //         $btn2.textContent = '이름 보기';
+        //     }
+        // });
+        // 쌤 답
+        $btn2.onclick = function() {
+            if($btn2.className === 'name') {
+                $p.innerHTML = '홍길동<br>20세<br>능력단위<br>Java, Oracle, Jsp, CSS, JavaScript';
+                $a.style.display = 'none';
+                $btn2.textContent = '내용 보기';
+                $btn2.className = 'conView';
+            } else {
+                $p.innerHTML = '자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다.또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다. ';
+                $a.style.display = 'block';
                 $btn2.textContent = '이름 보기';
+                $btn2.className = 'name';
+
             }
-        });
+        }
+
 
         /*
         메모장 보기 모드는 textarea를 생성해서 추가.
@@ -169,8 +190,8 @@
                 $btn3.textContent = '사진 모드';
                 $inner2.removeChild($inner2.firstElementChild);
                 
-                const $textarea = document.createElement('input');
-                $textarea.classList.add('memo');
+                const $textarea = document.createElement('textarea');
+                $textarea.classList.add('memo');    // <==> $textarea.className ='memo';
                 $inner2.appendChild($textarea);
                 
                 const $confirm = document.createElement('button');
@@ -182,8 +203,8 @@
                 $inner2.removeChild($inner2.lastElementChild);
                 
                 const $img = document.createElement('img');
-                $inner2.appendChild($img);
                 $img.setAttribute('src', './img/1.jpg');
+                $inner2.appendChild($img);
 
             }
         });
