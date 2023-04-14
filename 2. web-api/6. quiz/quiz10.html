@@ -38,7 +38,7 @@
         const $ul = document.querySelector('ul');
         const $img = document.querySelector('.result img');
         $ul.addEventListener('click', e => {
-            if(e.currentTarget === e.target) return; //ul 안에 li 요소가 아닌 공백 클릭시 리턴함.
+            if (e.currentTarget === e.target) return; //ul 안에 li 요소가 아닌 공백 클릭시 리턴함.
             $img.setAttribute('src', e.target.src);
         });
     </script>

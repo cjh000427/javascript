@@ -64,9 +64,15 @@
         const $tbody = document.querySelector('table > tbody');
 
         $tbody.addEventListener('click', e => {
+            //매개변수를 선언하지 않으면 이벤트 객체를 못쓰냐? 아닙니다.
+            //event라는 이름으로 바로 사용이 가능합니다.
+            //근데 웬만하면 이름을 붙여서 쓰는 게 편합니다.
+
             if (!e.target.matches('tr > td > button')) return; //버튼 클릭이 아닐 경우 리턴함
             $tbody.removeChild(e.target.parentNode.parentNode);
             //e.target은 button태그 이므로 문제에서 제시한 tr을 지우려면 부모의 부모를 지워야함
+
+            // event.target.parentNode.parentNode.remove(); => 가능
         });
     </script>
 

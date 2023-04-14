@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 32px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="temp">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <button>확인</button>
+        </div>
+    </div>
+
+    <script>
+        const answer = 'home';
+        // console.log(answer.length);
+
+        const $wrap = document.querySelector('.wrap');
+
+        // const $input = document.querySelectorAll('input');
+        const $btn = document.querySelector('button');
+
+        $wrap.addEventListener('click', e => {
+            const $div = document.querySelector('div.temp');
+
+            if (!e.target.matches('.temp button')) {
+                console.log('부모요소는 이벤트 발생 안함!');
+                return;
+            }
+
+            const $input = e.target.parentNode.querySelectorAll('input');
+            console.log('input: ' + $input);
+
+            for (let i = 0; i < answer.length; i++) {
+                // 첫번째 글자 채점 로직
+                if ($input[i].value == answer[i]) {
+                    $input[i].style.background = 'green';
+                } else if (answer.includes($input[i].value)) {
+                    $input[i].style.background = 'yellow';
+                } else {
+                    $input[i].style.background = 'lightgrey';
+                }
+            }
+
+            // for(let i = 0; i < answer.length; i++) {
+            //     if($input[answer.length -1 ].style.background === 'green') {
+            //         return;
+            //     }
+                
+            // }
+
+            creatInput($div);
+            e.target.style.display = 'none';
+        });
+
+        function creatInput($div) {
+            const $clone = $div.cloneNode(true);
+            const $inputs = $clone.querySelectorAll('input');
+            for (let $ele of [...$inputs]) {
+                $ele.value = '';
+                $ele.style.background = 'white';
+            }
+            $wrap.appendChild($clone);
+
+            $div.classList.remove('temp');
+
+        }
+
+        // function checkAnswer() {
+        //     if() {
+
+        //     }
+        // }
+    </script>
+
+</body>
+
+</html>
